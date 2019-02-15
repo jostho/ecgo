@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecgo
+spec:
+  selector:
+    app: ecgo
+    tier: frontend
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 8000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecgo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ecgo
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: ecgo
+        tier: frontend
+    spec:
+      containers:
+      - name: ecgo
+        image: registry:5000/ecgo:0.1.0
+        args: [ "--redis-url", "redis:6379" ]
+        resources:
+          requests:
+            memory: 16Mi
+            cpu: 100m
+          limits:
+            memory: 32Mi
+            cpu: 100m
+        ports:
+        - containerPort: 8000
+          name: http
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ecgo
+spec:
+  rules:
+  - host: godis.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ecgo
+          servicePort: http
