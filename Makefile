@@ -13,7 +13,7 @@ LDFLAGS := -ldflags '-s -w -X main.versionNumber=$(VERSION) -X main.gitCommit=${
 
 APP_NAME := ecgo
 CONTAINER := $(APP_NAME)-scratch-container-1
-IMAGE_NAME := joset/$(APP_NAME):$(VERSION)
+IMAGE_NAME := jostho/$(APP_NAME):$(VERSION)
 IMAGE_BINARY_PATH := /bin/$(BINARY)
 PORT := 8000
 
