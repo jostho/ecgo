@@ -28,13 +28,6 @@ spec:
       containers:
       - name: ecgo
         image: registry:5000/ecgo:0.1.0
-        resources:
-          requests:
-            memory: 16Mi
-            cpu: 100m
-          limits:
-            memory: 32Mi
-            cpu: 100m
         ports:
         - containerPort: 8000
           name: http
