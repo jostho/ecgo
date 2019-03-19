@@ -146,7 +146,7 @@ func init() {
 
 func main() {
     addr := fmt.Sprintf("%s:%d", bind, port)
-    fmt.Println("Ecgo server will run on", addr)
+    fmt.Printf("Starting ecgo server address=%s version=%s gitcommit=%s\n", addr, versionNumber, gitCommit)
 
     if redisUrl != "" {
         var err error
