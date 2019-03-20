@@ -35,7 +35,9 @@ const contentTypeHeader = "Content-Type"
 
 const atoz = "abcdefghijklmnopqrstuvwxyz"
 const welcome = "Welcome to Ecgo server\n"
-var message1 = "Ecgo gives you %d"
+const messageOk = "OK"
+
+var messageWithStatus = "Ecgo gives you %d"
 
 
 func printVersion() {
@@ -87,7 +89,7 @@ func getHandler(w http.ResponseWriter, req *http.Request) {
     if err == nil {
         message = generateRandomString(bytes)
     } else {
-        message = fmt.Sprintf(message1, statusCode)
+        message = fmt.Sprintf(messageWithStatus, statusCode)
     }
 
     // get response string from redis
@@ -131,6 +133,11 @@ func postHandler(w http.ResponseWriter, req *http.Request) {
     }
 }
 
+// handle healthcheck
+func healthcheckHandler(w http.ResponseWriter, req *http.Request) {
+    io.WriteString(w, messageOk)
+}
+
 func init() {
     flag.BoolVar(&version, "version", version, "print version")
     flag.IntVar(&port, "port", port, "Port on which ecgo server runs")
@@ -163,6 +170,7 @@ func main() {
     handler.HandleFunc("/", indexHandler)
     handler.HandleFunc("/get/", getHandler)
     handler.HandleFunc("/post/", postHandler)
+    handler.HandleFunc("/healthcheck", healthcheckHandler)
 
     server := http.Server{
         Addr: addr,
