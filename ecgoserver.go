@@ -16,6 +16,7 @@ import (
     "time"
     "github.com/gorilla/handlers"
     "github.com/mediocregopher/radix"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 var bind = ""
@@ -171,6 +172,7 @@ func main() {
     handler.HandleFunc("/get/", getHandler)
     handler.HandleFunc("/post/", postHandler)
     handler.HandleFunc("/healthcheck", healthcheckHandler)
+    handler.Handle("/metrics", promhttp.Handler())
 
     server := http.Server{
         Addr: addr,

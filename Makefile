@@ -25,6 +25,7 @@ check:
 prep:
 	$(GO) get github.com/gorilla/handlers
 	$(GO) get github.com/mediocregopher/radix
+	$(GO) get github.com/prometheus/client_golang/prometheus/promhttp
 
 clean:
 	rm -f $(TARGET)

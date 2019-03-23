@@ -19,6 +19,6 @@ To run
 
     go run ecgoserver.go
 
-To build run make. The compiled binary is ~ 5 MB in size.
+To build run make. The compiled binary is ~ 8 MB in size.
 
     make
