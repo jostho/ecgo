@@ -13,7 +13,7 @@ This is an echo server written in go. This can be used to simulate http response
 
 To check the required dependencies
 
-    make check && make prep
+    make check
 
 To run
 

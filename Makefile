@@ -7,7 +7,7 @@ GIT := /usr/bin/git
 BINARY := ecgoserver
 TARGET := $(CURDIR)/$(BINARY)
 
-VERSION := 0.1.0
+VERSION := v0.2.0
 GIT_COMMIT := $(shell $(GIT) rev-parse --short HEAD)
 LDFLAGS := -ldflags '-s -w -X main.versionNumber=$(VERSION) -X main.gitCommit=${GIT_COMMIT}'
 
@@ -21,11 +21,6 @@ check:
 	$(GO) version
 	/usr/bin/buildah version | head -1
 	$(GIT) --version
-
-prep:
-	$(GO) get github.com/gorilla/handlers
-	$(GO) get github.com/mediocregopher/radix
-	$(GO) get github.com/prometheus/client_golang/prometheus/promhttp
 
 clean:
 	rm -f $(TARGET)
@@ -49,7 +44,7 @@ build-image:
 clean-image:
 	$(BUILDAH) rmi $(IMAGE_NAME)
 
-image: prep clean build-static build-image
+image: clean build-static build-image
 
-.PHONY: check prep clean build build-static
+.PHONY: check clean build build-static
 .PHONY: build-image clean-image image

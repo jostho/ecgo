@@ -15,7 +15,7 @@ import (
     "strings"
     "time"
     "github.com/gorilla/handlers"
-    "github.com/mediocregopher/radix"
+    "github.com/mediocregopher/radix/v3"
     "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
