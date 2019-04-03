@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: ecgo
-        image: registry:5000/ecgo:v0.2.0
+        image: registry:5000/jostho/ecgo:v0.2.0
         ports:
         - containerPort: 8000
           name: http
